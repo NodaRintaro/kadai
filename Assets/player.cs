@@ -11,6 +11,8 @@ public class player : MonoBehaviour
 
     [SerializeField] GameObject _scoreManagerObject;
 
+    private float _xLimit = 10;
+
     private GameObject _coin = null;
 
     Rigidbody _rb;
@@ -28,10 +30,13 @@ public class player : MonoBehaviour
     private void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
-
         _dir = new Vector3(x, -1, _z);
-
         _rb.velocity = _dir * _movePower;
+        //ˆÚ“®ˆ—
+        Vector3 currentPos = transform.position;
+        currentPos.x = Mathf.Clamp(currentPos.x, -_xLimit,_xLimit);
+        transform.position = currentPos;
+        //ˆÚ“®§ŒÀ
     }
 
     private void OnTriggerEnter(Collider other)
